@@ -4,11 +4,16 @@ generate:
 	hello.proto
 
 run-server:
-	go run cmd/server/main.go
+	go run cmd/grpc_gateway/server/main.go
 
 
 run-client:
-	go run cmd/client/main.go
+	go run cmd/grpc_gateway/client/main.go
 
+run-proxy:
+	go run cmd/grpc_gateway/proxy/main.go
+
+gen-stub:
+	buf generate
 
 PHONY: generate run-server run-client

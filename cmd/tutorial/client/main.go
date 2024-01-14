@@ -6,10 +6,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	hellopb "grpc-practice/pkg/grpc"
 	"io"
 	"log"
 	"os"
+
+	hellopb "github.com/yudai2929/grpc-practice/pkg/grpc"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
