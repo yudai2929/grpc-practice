@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package proto.todo;
+
+import "google/protobuf/timestamp.proto";
+
+message Todo {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  bool done = 4;
+  google.protobuf.Timestamp createdAt = 5;
+  google.protobuf.Timestamp updatedAt = 6;
+}

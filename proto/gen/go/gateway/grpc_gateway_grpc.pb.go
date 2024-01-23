@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: api/grpc_gateway.proto
+// source: gateway/grpc_gateway.proto
 
-package grpc
+package gateway
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	GateWayService_Echo_FullMethodName = "/your.service.v1.GateWayService/Echo"
+	GateWayService_Echo_FullMethodName = "/proto.grpc_gateway.GateWayService/Echo"
 )
 
 // GateWayServiceClient is the client API for GateWayService service.
@@ -96,7 +96,7 @@ func _GateWayService_Echo_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var GateWayService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "your.service.v1.GateWayService",
+	ServiceName: "proto.grpc_gateway.GateWayService",
 	HandlerType: (*GateWayServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -105,5 +105,5 @@ var GateWayService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/grpc_gateway.proto",
+	Metadata: "gateway/grpc_gateway.proto",
 }

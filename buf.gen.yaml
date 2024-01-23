@@ -1,16 +1,21 @@
 version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/yudai2929/grpc-practice/proto/gen/go
+    except:
+      - buf.build/googleapis/googleapis
+      - buf.build/grpc-ecosystem/grpc-gateway
 plugins:
   - plugin: go
-    out: gen/go
+    out: proto/gen/go
     opt:
       - paths=source_relative
   - plugin: go-grpc
-    out: gen/go
+    out: proto/gen/go
     opt:
       - paths=source_relative
   - plugin: grpc-gateway
-    out: gen/go
+    out: proto/gen/go
     opt:
       - paths=source_relative
-  - plugin: openapiv2
-    out: gen/openapiv2

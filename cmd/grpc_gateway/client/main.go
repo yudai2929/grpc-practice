@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 
-	pb "github.com/yudai2929/grpc-practice/gen/go/api"
+	pb "github.com/yudai2929/grpc-practice/proto/gen/go/gateway"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

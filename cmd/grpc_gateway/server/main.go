@@ -14,7 +14,7 @@ import (
 	// _ "google.golang.org/grpc/cmd/protoc-gen-go-grpc"
 	// _ "google.golang.org/protobuf/cmd/protoc-gen-go"
 
-	pb "github.com/yudai2929/grpc-practice/gen/go/api"
+	pb "github.com/yudai2929/grpc-practice/proto/gen/go/gateway"
 )
 
 type myServer struct {
