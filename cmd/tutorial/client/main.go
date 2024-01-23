@@ -10,7 +10,7 @@ import (
 	"log"
 	"os"
 
-	hellopb "github.com/yudai2929/grpc-practice/pkg/grpc"
+	hellopb "github.com/yudai2929/grpc-practice/proto/gen/go/hello"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

@@ -1,20 +1,16 @@
 syntax = "proto3";
 
-package your.service.v1;
-
-option go_package = "pkg/grpc";
+package proto.grpc_gateway;
 
 import "google/api/annotations.proto";
 
-message StringMessage {
-   string value = 1;
-}
+message StringMessage { string value = 1; }
 
 service GateWayService {
   rpc Echo(StringMessage) returns (StringMessage) {
     option (google.api.http) = {
-      post: "/v1/example/echo"
-      body: "*"
+      post : "/v1/example/echo"
+      body : "*"
     };
   }
 }

@@ -15,7 +15,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
-	hellopb "github.com/yudai2929/grpc-practice/pkg/grpc"
+	hellopb "github.com/yudai2929/grpc-practice/proto/gen/go/hello"
 )
 
 type myServer struct {
