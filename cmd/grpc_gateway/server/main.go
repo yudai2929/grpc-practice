@@ -18,7 +18,7 @@ import (
 )
 
 type myServer struct {
-	pb.UnimplementedGateWayServiceServer
+	// pb.UnimplementedGateWayServiceServer
 }
 
 func newServer() *myServer {
