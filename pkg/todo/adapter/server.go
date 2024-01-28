@@ -4,28 +4,34 @@ import (
 	"context"
 
 	"github.com/yudai2929/grpc-practice/pkg/todo/usecase"
+	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
 	pb "github.com/yudai2929/grpc-practice/proto/gen/go/todo"
 )
 
-type TodoHandler struct {
+type TodoServer struct {
+	pb.UnimplementedTodoServiceServer
 	usecase usecase.TodoUsecase
 }
 
-func NewTodoHandler(usecase usecase.TodoUsecase) *TodoHandler {
-	return &TodoHandler{
+func NewTodoServer(usecase usecase.TodoUsecase) *TodoServer {
+	return &TodoServer{
 		usecase: usecase,
 	}
 }
 
-func (th *TodoHandler) CreateTodo(ctx context.Context, req *pb.CreateTodoRequest) (*pb.CreateTodoResponse, error) {
+func (s *TodoServer) Register(server *grpc.Server) {
+	pb.RegisterTodoServiceServer(server, s)
+}
+
+func (s *TodoServer) CreateTodo(ctx context.Context, req *pb.CreateTodoRequest) (*pb.CreateTodoResponse, error) {
 	input := &usecase.CreateTodoInput{
 		Title:       req.GetTitle(),
 		Description: req.GetDescription(),
 	}
 
-	output, err := th.usecase.CreateTodo(*input)
+	output, err := s.usecase.CreateTodo(*input)
 
 	if err != nil {
 		return nil, err
@@ -45,12 +51,12 @@ func (th *TodoHandler) CreateTodo(ctx context.Context, req *pb.CreateTodoRequest
 	return res, nil
 }
 
-func (th *TodoHandler) GetTodo(ctx context.Context, req *pb.GetTodoRequest) (*pb.GetTodoResponse, error) {
+func (s *TodoServer) GetTodo(ctx context.Context, req *pb.GetTodoRequest) (*pb.GetTodoResponse, error) {
 	input := &usecase.GetTodoByIDInput{
 		ID: req.GetId(),
 	}
 
-	output, err := th.usecase.GetTodoByID(*input)
+	output, err := s.usecase.GetTodoByID(*input)
 
 	if err != nil {
 		return nil, err

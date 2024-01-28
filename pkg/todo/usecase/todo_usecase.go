@@ -10,13 +10,14 @@ import (
 )
 
 type todoUsecase struct {
-	validate        *validator.Validate
-	todo_repository repository.TodoRepository
+	validate       *validator.Validate
+	todoRepository repository.TodoRepository
 }
 
-func NewTodoUsecase() TodoUsecase {
+func NewTodoUsecase(todoRepository repository.TodoRepository) TodoUsecase {
 	return &todoUsecase{
-		validate: validator.New(),
+		validate:       validator.New(),
+		todoRepository: todoRepository,
 	}
 }
 
@@ -34,7 +35,7 @@ func (tu *todoUsecase) CreateTodo(input CreateTodoInput) (*CreateTodoOutput, err
 		UpdatedAt:   time.Now(),
 	}
 
-	todo, err := tu.todo_repository.CreateTodo(todo)
+	todo, err := tu.todoRepository.CreateTodo(todo)
 
 	if err != nil {
 		return nil, err
@@ -52,7 +53,7 @@ func (tu *todoUsecase) GetTodoByID(input GetTodoByIDInput) (*GetTodoByIDOutput, 
 		return nil, err
 	}
 
-	todo, err := tu.todo_repository.GetTodoByID(input.ID)
+	todo, err := tu.todoRepository.GetTodoByID(input.ID)
 
 	if err != nil {
 		return nil, err

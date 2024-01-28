@@ -8,9 +8,9 @@ message GetTodoRequest { string id = 1; }
 
 message GetTodoResponse { Todo todo = 1; }
 
-message ListTodosRequest {}
+// message ListTodosRequest {}
 
-message ListTodosResponse { repeated Todo todos = 1; }
+// message ListTodosResponse { repeated Todo todos = 1; }
 
 message CreateTodoRequest {
   string title = 1;
@@ -19,22 +19,22 @@ message CreateTodoRequest {
 
 message CreateTodoResponse { Todo todo = 1; }
 
-message UpdateTodoRequest {
-  string id = 1;
-  string title = 2;
-  string description = 3;
-}
+// message UpdateTodoRequest {
+//   string id = 1;
+//   string title = 2;
+//   string description = 3;
+// }
 
-message UpdateTodoResponse { Todo todo = 1; }
+// message UpdateTodoResponse { Todo todo = 1; }
 
-message DoneTodoRequest { string id = 1; }
+// message DoneTodoRequest { string id = 1; }
 
-message DoneTodoResponse { Todo todo = 1; }
+// message DoneTodoResponse { Todo todo = 1; }
 
 service TodoService {
   rpc GetTodo(GetTodoRequest) returns (GetTodoResponse) {}
-  rpc ListTodos(ListTodosRequest) returns (ListTodosResponse) {}
+  // rpc ListTodos(ListTodosRequest) returns (ListTodosResponse) {}
   rpc CreateTodo(CreateTodoRequest) returns (CreateTodoResponse) {}
-  rpc UpdateTodo(UpdateTodoRequest) returns (UpdateTodoResponse) {}
-  rpc DoneTodo(DoneTodoRequest) returns (DoneTodoResponse) {}
+  // rpc UpdateTodo(UpdateTodoRequest) returns (UpdateTodoResponse) {}
+  // rpc DoneTodo(DoneTodoRequest) returns (DoneTodoResponse) {}
 }
