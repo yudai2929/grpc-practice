@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
+	"github.com/yudai2929/grpc-practice/pkg/libs/password"
 	"github.com/yudai2929/grpc-practice/pkg/user/domain/entity"
 	"github.com/yudai2929/grpc-practice/pkg/user/domain/repository"
 )
@@ -38,11 +39,17 @@ func (au *authUsecase) SignUp(input SignUpInput) (*SignUpOutput, error) {
 		return nil, fmt.Errorf("user already exists")
 	}
 
+	password, err := password.Hash(input.Password)
+
+	if err != nil {
+		return nil, err
+	}
+
 	newUser := &entity.User{
 		ID:        uuid.New().String(),
 		Name:      input.Name,
 		Email:     input.Email,
-		Password:  input.Password,
+		Password:  password,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -73,8 +80,8 @@ func (au *authUsecase) SignIn(input SignInInput) (*SignInOutput, error) {
 		return nil, err
 	}
 
-	if user.Password != input.Password {
-		return nil, err
+	if !user.IsEqualPassword(input.Password) {
+		return nil, fmt.Errorf("password is incorrect")
 	}
 
 	output := &SignInOutput{
