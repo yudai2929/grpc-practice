@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package proto.user;
+
+import "user/user.proto";
+
+message SignUpRequest {
+  string email = 1;
+  string password = 2;
+  string name = 3;
+}
+
+message SignUpResponse {
+  string token = 1;
+  string userId = 2;
+}
+
+message SignInRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message SignInResponse {
+  string token = 1;
+  string userId = 2;
+}
+
+message GetUserByIDRequest { string id = 1; }
+
+message GetUserByIDResponse { User user = 1; }
+
+service UserService {
+  rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
+  rpc SignIn(SignInRequest) returns (SignInResponse) {}
+  rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse) {}
+}

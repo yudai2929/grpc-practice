@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/yudai2929/grpc-practice/pkg/libs/interceptor"
 	"github.com/yudai2929/grpc-practice/pkg/todo/adapter"
 	"github.com/yudai2929/grpc-practice/pkg/todo/infrastructure/mock"
 	"github.com/yudai2929/grpc-practice/pkg/todo/usecase"
@@ -9,7 +10,7 @@ import (
 )
 
 func New() *grpc.Server {
-	s := grpc.NewServer()
+	s := grpc.NewServer(grpc.ChainUnaryInterceptor(interceptor.LogInterceptor))
 
 	todoRepository := mock.NewTodoRepositoryMock()
 
