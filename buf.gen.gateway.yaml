@@ -1,0 +1,19 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/yudai2929/grpc-practice/proto/gen/go
+
+plugins:
+  - plugin: buf.build/grpc-ecosystem/gateway:v2.15.2
+    out: proto/gen/go
+    opt:
+      - paths=source_relative
+      - allow_repeated_fields_in_body=true
+  - plugin: buf.build/grpc-ecosystem/openapiv2:v2.15.2
+    out: proto/gen/go
+    opt:
+      - allow_merge=true
+      - enums_as_ints=true
+      - disable_default_errors=true
+      - merge_file_name=docs

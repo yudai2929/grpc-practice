@@ -1,0 +1,348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "gateway_todo/todo.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TodoService"
+    },
+    {
+      "name": "UserService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/todos": {
+      "post": {
+        "operationId": "TodoService_CreateTodo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gateway_todoCreateTodoResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "CreateTodoRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/gateway_todoCreateTodoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TodoService"
+        ]
+      }
+    },
+    "/todos/{id}": {
+      "get": {
+        "operationId": "TodoService_GetTodo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gateway_todoGetTodoResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TodoService"
+        ]
+      }
+    },
+    "/users/signin": {
+      "post": {
+        "operationId": "UserService_SignIn",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gateway_todoSignInResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "SignInRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/gateway_todoSignInRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/users/signup": {
+      "post": {
+        "operationId": "UserService_SignUp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gateway_todoSignUpResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "SignUpRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/gateway_todoSignUpRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "UserService_GetUserByID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gateway_todoGetUserByIDResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "gateway_todoCreateTodoRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "description": "CreateTodoRequest",
+      "title": "CreateTodoRequest",
+      "required": [
+        "title",
+        "description"
+      ]
+    },
+    "gateway_todoCreateTodoResponse": {
+      "type": "object",
+      "properties": {
+        "todo": {
+          "$ref": "#/definitions/gateway_todoTodo"
+        }
+      },
+      "description": "CreateTodoResponse",
+      "title": "CreateTodoResponse",
+      "required": [
+        "todo"
+      ]
+    },
+    "gateway_todoGetTodoResponse": {
+      "type": "object",
+      "properties": {
+        "todo": {
+          "$ref": "#/definitions/gateway_todoTodo"
+        }
+      },
+      "description": "GetTodoResponse",
+      "title": "GetTodoResponse",
+      "required": [
+        "todo"
+      ]
+    },
+    "gateway_todoGetUserByIDResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/gateway_todoUser"
+        }
+      },
+      "description": "GetUserByIDResponse",
+      "title": "GetUserByIDResponse",
+      "required": [
+        "user"
+      ]
+    },
+    "gateway_todoSignInRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "description": "SignInRequest",
+      "title": "SignInRequest",
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "gateway_todoSignInResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "description": "SignInResponse",
+      "title": "SignInResponse",
+      "required": [
+        "token",
+        "userId"
+      ]
+    },
+    "gateway_todoSignUpRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "description": "SignUpRequest",
+      "title": "SignUpRequest",
+      "required": [
+        "email",
+        "password",
+        "name"
+      ]
+    },
+    "gateway_todoSignUpResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "description": "SignUpResponse",
+      "title": "SignUpResponse",
+      "required": [
+        "token",
+        "userId"
+      ]
+    },
+    "gateway_todoTodo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "done": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "description": "Todo",
+      "title": "Todo",
+      "required": [
+        "id",
+        "title",
+        "description",
+        "done",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "gateway_todoUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "description": "User",
+      "title": "User",
+      "required": [
+        "id",
+        "name",
+        "email",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  }
+}

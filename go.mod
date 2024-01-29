@@ -12,10 +12,19 @@ require (
 )
 
 require (
+	github.com/ghodss/yaml v1.0.0 // indirect
+	github.com/golang/glog v1.1.2 // indirect
+	google.golang.org/genproto v0.0.0-20231212172506-995d672761c0 // indirect
+	gopkg.in/yaml.v2 v2.2.3 // indirect
+)
+
+require (
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
+	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/golang/protobuf v1.5.3 // indirect
+	github.com/grpc-ecosystem/grpc-gateway v1.16.0
 	github.com/leodido/go-urn v1.2.4 // indirect
 	golang.org/x/crypto v0.16.0 // indirect
 	golang.org/x/net v0.19.0 // indirect

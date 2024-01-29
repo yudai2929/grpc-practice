@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package proto.gateway_todo;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+import "google/protobuf/timestamp.proto";
+
+message Todo {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema : {
+      title : "Todo",
+      description : "Todo",
+      required : [
+        "id",
+        "title",
+        "description",
+        "done",
+        "createdAt",
+        "updatedAt"
+      ],
+    }
+  };
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  bool done = 4;
+  google.protobuf.Timestamp createdAt = 5;
+  google.protobuf.Timestamp updatedAt = 6;
+}

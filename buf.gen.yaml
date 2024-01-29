@@ -15,7 +15,4 @@ plugins:
     out: proto/gen/go
     opt:
       - paths=source_relative
-  - plugin: grpc-gateway
-    out: proto/gen/go
-    opt:
-      - paths=source_relative
+

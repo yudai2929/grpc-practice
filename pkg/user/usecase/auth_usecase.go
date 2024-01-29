@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
+	"github.com/yudai2929/grpc-practice/pkg/libs/jwt"
 	"github.com/yudai2929/grpc-practice/pkg/libs/password"
 	"github.com/yudai2929/grpc-practice/pkg/user/domain/entity"
 	"github.com/yudai2929/grpc-practice/pkg/user/domain/repository"
@@ -31,10 +32,6 @@ func (au *authUsecase) SignUp(input SignUpInput) (*SignUpOutput, error) {
 
 	user, err := au.userRepository.GetUserByEmail(input.Email)
 
-	if err != nil {
-		return nil, err
-	}
-
 	if user != nil {
 		return nil, fmt.Errorf("user already exists")
 	}
@@ -45,8 +42,10 @@ func (au *authUsecase) SignUp(input SignUpInput) (*SignUpOutput, error) {
 		return nil, err
 	}
 
+	userID := uuid.New().String()
+
 	newUser := &entity.User{
-		ID:        uuid.New().String(),
+		ID:        userID,
 		Name:      input.Name,
 		Email:     input.Email,
 		Password:  password,
@@ -60,9 +59,15 @@ func (au *authUsecase) SignUp(input SignUpInput) (*SignUpOutput, error) {
 		return nil, err
 	}
 
+	token, err := jwt.New(newUser.ID)
+
+	if err != nil {
+		return nil, err
+	}
+
 	output := &SignUpOutput{
-		Token:  newUser.ID,
-		UserID: newUser.ID,
+		Token:  token,
+		UserID: userID,
 	}
 
 	return output, nil
@@ -84,8 +89,14 @@ func (au *authUsecase) SignIn(input SignInInput) (*SignInOutput, error) {
 		return nil, fmt.Errorf("password is incorrect")
 	}
 
+	token, err := jwt.New(user.ID)
+
+	if err != nil {
+		return nil, err
+	}
+
 	output := &SignInOutput{
-		Token:  user.ID,
+		Token:  token,
 		UserID: user.ID,
 	}
 

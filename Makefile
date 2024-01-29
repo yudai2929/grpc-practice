@@ -16,4 +16,7 @@ run-proxy:
 gen-stub:
 	buf generate
 
+gen-stub-gateway: gen-stub
+	buf generate --path ./proto/src/gateway_todo/ --template buf.gen.gateway.yaml 
+
 PHONY: generate run-server run-client

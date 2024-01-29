@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package proto.gateway_todo;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+import "gateway_todo/user.proto";
+
+message SignUpRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema : {
+      title : "SignUpRequest",
+      description : "SignUpRequest",
+      required : [ "email", "password", "name" ],
+    },
+  };
+  string email = 1;
+  string password = 2;
+  string name = 3;
+}
+
+message SignUpResponse {
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema : {
+      title : "SignUpResponse",
+      description : "SignUpResponse",
+      required : [ "token", "userId" ],
+    },
+  };
+  string token = 1;
+  string userId = 2;
+}
+
+message SignInRequest {
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema : {
+      title : "SignInRequest",
+      description : "SignInRequest",
+      required : [ "email", "password" ],
+    },
+  };
+  string email = 1;
+  string password = 2;
+}
+
+message SignInResponse {
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema : {
+      title : "SignInResponse",
+      description : "SignInResponse",
+      required : [ "token", "userId" ],
+    },
+  };
+
+  string token = 1;
+  string userId = 2;
+}
+
+message GetUserByIDRequest {
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema : {
+      title : "GetUserByIDRequest",
+      description : "GetUserByIDRequest",
+      required : [ "id" ],
+    },
+  };
+  string id = 1;
+}
+
+message GetUserByIDResponse {
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema : {
+      title : "GetUserByIDResponse",
+      description : "GetUserByIDResponse",
+      required : [ "user" ],
+    },
+  };
+  User user = 1;
+}
+
+service UserService {
+  rpc SignUp(SignUpRequest) returns (SignUpResponse) {
+    option (google.api.http) = {
+      post : "/users/signup"
+      body : "*"
+    };
+  }
+  rpc SignIn(SignInRequest) returns (SignInResponse) {
+    option (google.api.http) = {
+      post : "/users/signin"
+      body : "*"
+    };
+  }
+  rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse) {
+    option (google.api.http) = {
+      get : "/users/{id}"
+    };
+  }
+}

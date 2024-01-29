@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package proto.gateway_todo;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+import "google/protobuf/timestamp.proto";
+
+message User {
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema : {
+      title : "User"
+      description : "User"
+      required : [ "id", "name", "email", "createdAt", "updatedAt" ]
+    }
+  };
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  google.protobuf.Timestamp createdAt = 4;
+  google.protobuf.Timestamp updatedAt = 5;
+}

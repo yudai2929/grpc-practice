@@ -5,6 +5,7 @@ import (
 
 	"github.com/yudai2929/grpc-practice/pkg/user/usecase"
 	pb "github.com/yudai2929/grpc-practice/proto/gen/go/user"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (s *UserServer) GetUserByID(ctx context.Context, req *pb.GetUserByIDRequest) (*pb.GetUserByIDResponse, error) {
@@ -20,9 +21,11 @@ func (s *UserServer) GetUserByID(ctx context.Context, req *pb.GetUserByIDRequest
 
 	res := &pb.GetUserByIDResponse{
 		User: &pb.User{
-			Id:    output.User.ID,
-			Name:  output.User.Name,
-			Email: output.User.Email,
+			Id:        output.User.ID,
+			Name:      output.User.Name,
+			Email:     output.User.Email,
+			CreatedAt: timestamppb.New(output.User.CreatedAt),
+			UpdatedAt: timestamppb.New(output.User.UpdatedAt),
 		},
 	}
 

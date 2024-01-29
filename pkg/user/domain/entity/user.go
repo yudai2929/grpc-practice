@@ -16,11 +16,5 @@ type User struct {
 }
 
 func (u *User) IsEqualPassword(notHashPassword string) bool {
-	hash, err := password.Hash(notHashPassword)
-
-	if err != nil {
-		return false
-	}
-
-	return u.Password == hash
+	return password.IsEqualsHashAndPassword(u.Password, notHashPassword)
 }

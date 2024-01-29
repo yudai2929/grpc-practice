@@ -21,7 +21,8 @@ func (s *UserServer) SignUp(ctx context.Context, req *pb.SignUpRequest) (*pb.Sig
 	}
 
 	res := &pb.SignUpResponse{
-		Token: output.Token,
+		Token:  output.Token,
+		UserId: output.UserID,
 	}
 
 	return res, nil
@@ -40,7 +41,8 @@ func (s *UserServer) SignIn(ctx context.Context, req *pb.SignInRequest) (*pb.Sig
 	}
 
 	res := &pb.SignInResponse{
-		Token: output.Token,
+		Token:  output.Token,
+		UserId: output.UserID,
 	}
 
 	return res, nil
