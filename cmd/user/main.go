@@ -4,12 +4,19 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/yudai2929/grpc-practice/pkg/config"
 	"github.com/yudai2929/grpc-practice/pkg/user/server"
 )
 
 func main() {
 	port := 8081
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
+	if err != nil {
+		panic(err)
+	}
+
+	err = config.Set()
+
 	if err != nil {
 		panic(err)
 	}

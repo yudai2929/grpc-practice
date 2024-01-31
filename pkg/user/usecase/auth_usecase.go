@@ -32,6 +32,10 @@ func (au *authUsecase) SignUp(input SignUpInput) (*SignUpOutput, error) {
 
 	user, err := au.userRepository.GetUserByEmail(input.Email)
 
+	if err != nil {
+		return nil, err
+	}
+
 	if user != nil {
 		return nil, fmt.Errorf("user already exists")
 	}
