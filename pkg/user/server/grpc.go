@@ -3,7 +3,7 @@ package server
 import (
 	"github.com/yudai2929/grpc-practice/pkg/libs/interceptor"
 	"github.com/yudai2929/grpc-practice/pkg/user/adapter"
-	"github.com/yudai2929/grpc-practice/pkg/user/infrastructure/mock"
+	"github.com/yudai2929/grpc-practice/pkg/user/infrastructure/spanner"
 	"github.com/yudai2929/grpc-practice/pkg/user/usecase"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -12,7 +12,7 @@ import (
 func New() *grpc.Server {
 	s := grpc.NewServer(grpc.ChainUnaryInterceptor(interceptor.LogInterceptor))
 
-	userRepository := mock.NewUserRepositoryMock()
+	userRepository := spanner.NewUserRepositoryImpl()
 
 	userUsecase := usecase.NewUserUsecase(userRepository)
 
